@@ -1,5 +1,6 @@
+const choices = ['rock', 'paper', 'scissors'];
+
 function getComputerChoice() {
-    const choices = ['rock', 'paper', 'scissors'];
     const randIndex = Math.floor(Math.random() * choices.length);
     return choices[randIndex];
 }
@@ -7,9 +8,8 @@ function getComputerChoice() {
 
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return "It's a Tie!";
-    } else if (playerSelection === "rock" && computerSelection === "scissors") {
+
+      if (playerSelection === "rock" && computerSelection === "scissors") {
         return "You win, rock beats scissors";
     } else if (playerSelection === "paper" && computerSelection === "rock") {
         return "You win, paper beats rock";
@@ -21,19 +21,41 @@ function playRound(playerSelection, computerSelection) {
         return "You lose, scissors beats paper";
     } else if (playerSelection === "scissors" && computerSelection === "rock") {
         return "You lose, rock beats scissors";
+    } else {
+        return "It's a Tie!"
     }
 }
 
+function getPlayerChoice() {
+    let validatedInput = false;
+    while(validatedInput == false) {
+        const choice = prompt("Rock Paper Scissors");
+        if (choice == null){
+            continue;
+        }
+        const choiceInLower = choice.toLowerCase();
+        if(choices.includes(choiceInLower)) {
+            validatedInput = true;
+            return choiceInLower;
+        }
+    }
+}
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+    const playerSelection = getPlayerChoice();
+    const computerSelection = getComputerChoice();
+    console.log(playRound (playerSelection, computerSelection));
+    }
+}
+
+game();
 
 
 
 
 
-const computerChoice = getComputerChoice();
 
-console.log("rock", computerChoice)
-
-console.log(playRound("rock", computerChoice));
 
 
 
